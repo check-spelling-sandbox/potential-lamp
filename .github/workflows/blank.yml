@@ -3,7 +3,7 @@ on:
   push:
 jobs:
   build:
-    permissions: {}
+    permissions: read-all
     runs-on: ubuntu-latest
     steps:
       - name: Run a multi-line script
