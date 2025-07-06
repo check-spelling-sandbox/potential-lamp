@@ -13,10 +13,14 @@ jobs:
 
           gh_debug() {
             echo "gh $@"
-            gh "$@" > out 2> err || true
-            cat $out
+            if gh "$@" > out 2> err; then
+              :
+            else
+              echo exit code: $?
+            fi
+            cat out
             echo
-            cat $err
+            cat err
             echo
           }
 
