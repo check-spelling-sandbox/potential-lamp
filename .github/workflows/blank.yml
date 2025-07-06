@@ -42,6 +42,7 @@ jobs:
               -f commit_sha=0000000000000000000000000000000000000000 \
               -f analysis_key=0000000000000000000000000000000000000000 \
               -f head_oid=0000000000000000000000000000000000000000 \
+              -f commit_oid=0000000000000000000000000000000000000000 \
               -f ref=refs/tags/check-spelling-sarif-pre-flight-test \
               -f sarif=""
           )
