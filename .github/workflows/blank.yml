@@ -21,6 +21,7 @@ jobs:
             -f commit_sha=0000000000000000000000000000000000000000 \
             -f ref=refs/tags/check-spelling-sarif-pre-flight-test \
             -f sarif="" || true
+
            gh api /repos/$GITHUB_REPOSITORY/code-scanning/codeql-action/features || true
           ) 2>&1
           echo '```'
