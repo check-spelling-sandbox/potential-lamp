@@ -15,14 +15,21 @@ jobs:
           echo '```'
           set -x
           (
-          gh api /repos/$GITHUB_REPOSITORY/code-scanning/sarifs \
-            --method POST \
-            -H "Accept: application/vnd.github+json" \
-            -f commit_sha=0000000000000000000000000000000000000000 \
-            -f ref=refs/tags/check-spelling-sarif-pre-flight-test \
-            -f sarif="" || true
+            gh api /repos/$GITHUB_REPOSITORY/code-scanning/sarifs \
+              --method POST \
+              -H "Accept: application/vnd.github+json" \
+              -f commit_sha=0000000000000000000000000000000000000000 \
+              -f ref=refs/tags/check-spelling-sarif-pre-flight-test \
+              -f sarif="" || true
+  
+            gh api /repos/$GITHUB_REPOSITORY/code-scanning/codeql-action/features || true
 
-           gh api /repos/$GITHUB_REPOSITORY/code-scanning/codeql-action/features || true
+            gh api "/repos/$GITHUB_REPOSITORY/code-scanning/analysis" \
+              --method PUT \
+              -H "Accept: application/vnd.github+json" \
+              -f commit_sha=0000000000000000000000000000000000000000 \
+              -f ref=refs/tags/check-spelling-sarif-pre-flight-test \
+              -f sarif="" || true
           ) 2>&1
           echo '```'
           ) | tee -a $GITHUB_STEP_SUMMARY
